@@ -1,0 +1,211 @@
+{% load static %}
+
+<!-- Author : Bharat Naik -->
+     
+
+<!DOCTYPE html>
+
+<html lang="en">
+<!--## Head tag start ##-->
+      <head>
+      
+            <title>Youtube Downloader - Supports Audio and Video</title>
+            
+            
+            
+            
+          <!--## meta tag start ##-->  
+           <meta charset="utf-8">
+           <meta name="viewport" content="width=device-width, initial-scale=1">
+           <meta name="title" content="Youtube Downloader - Supports Audio and Video">
+           <meta name="description" content="Download any youtube video in mp4 or mp3 audio format.">
+        <meta name="author" content="Bharat Naik">
+        <meta name="robots" content= "index, follow">
+        <!--## meta tag end ##-->
+        
+        
+        
+        
+    <!--######## CSS #######      -->    
+        <link rel="canonical" href="#" />
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+        <!-- Google Fonts -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+        <!-- Bootstrap core CSS -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Material Design Bootstrap -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+  <!-- ######### CSS --############>
+  
+              
+ 
+ 
+ <!--############JSS#######-->
+        <!-- JQuery -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+    <!--##########JSS########-->    
+        
+        
+       </head>
+       
+       
+ <!--###### head tag end ####-->      
+       
+
+
+
+
+
+<body>
+      <nav class="navbar navbar-dark black">
+            <span class="navbar-brand">
+            <img src="{% static 'youtube.png' %}" height="30" class="d-inline-block align-top"
+      alt="youtube"><b>      Youtube Downloader</b>
+            </span>
+            <a href="{% url 'help' %}">
+            <i class="fas fa-question-circle white-text mr-3 text-right"></i>
+            </a>
+      </nav>
+        
+ 
+<div class='container shadow-lg' style='margin-top:40px;' >
+	<div class="card mb-3">
+		<div class="card-body ">
+			<form action="{% url 'ytdl' %}" method="post">
+				{% csrf_token %}
+				<div class="md-form">
+  <input type="url" name="url" id="form1" class="form-control">
+  <label for="form1">Enter Video url</label>
+</div>
+				<button type="submit" class="btn btn-black mt-3 ">Search</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+
+<div class="container rounded bg-dark text-white">
+	<div class="card  shadow-lg m-3" >
+		<div class="embed-responsive embed-responsive-16by9">
+			<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{video.videoid}}">
+			</iframe>
+		</div>
+	</div>
+	<div class="card-body">
+		<h4 class="card-title">
+			{{video.title}}
+		</h4>
+	</div>
+</div>
+
+
+
+
+<div class='container shadow-lg' style='margin-top:40px;' >
+	<div class="card text-white bg-dark mb-3">
+		<div class="card-header bg-black">
+			<h3 class='card-title'> video links</h3>
+		</div>
+		<div class="card-body ">
+			<table class="table text-white">
+				<thead>
+					<tr>
+						<th scope="col">format</th>
+						<th scope="col">Size</th>
+						<th scope="col"></th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for i,j,k in vdo %}
+						<tr>
+							<td>{{i}}</td>
+							<td >{{j}}</td>
+							<td><a href="{{k}}" class="fas fa-download white"></a></td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+			
+<div class='container shadow-lg' style='margin-top:40px;' >
+	<div class="card text-white bg-dark mb-3">
+		<div class="card-header bg-black">
+		<h3 class='card-title'>  audio links</h3>
+		</div>
+		<div class="card-body ">			
+			<table class="table text-white">
+				<thead>
+					<tr>
+						<th scope="col">format</th>
+						<th scope="col">Size</th>
+						<th scope="col"></th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for x,y,z in ado %}
+						<tr>
+							<td>{{x}}</td>
+							<td >{{y}}</td>
+							<td>
+								<a href="{{z}}" class="fas fa-download white">
+								</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+        
+        
+        <!--#############  Footer Start  ################ -->
+        <footer class="page-footer font-small black pt-4">
+            <div class="container text-center text-md-left">
+                <div class="row text-center text-md-left mt-3 pb-3">
+                    <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                        <h6 class="text-uppercase mb-4 font-weight-bold">Youtube Downloader</h6>
+                        <p></p>
+                    </div>
+                    
+                   
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                        <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
+                        <p><i class="fas fa-envelope mr-3"></i> seriousviper777@gmail.com</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row d-flex align-items-center">
+                    <div class="col-md-7 col-lg-8">
+                        <p class="text-center text-md-left">© 2020 Copyright:
+                            <a href="https://bharatnet.herokuapp.com/">
+                            <strong> Bharat Naik</strong>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!--#############   Footer End  ################ -->
+        
+        
+        
+        
+        
+        
+        
+        
+    </body>
+</html>
+
+
